@@ -1,98 +1,216 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import Feather from "@expo/vector-icons/Feather";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+const colors = {
+  bg: "#F3F3F7",
+  sendBg: "#FCDBD4",
+  primary: "#E62A50",
+};
 
-export default function HomeScreen() {
+const Index = () => {
+  // usss
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    <SafeAreaView style={styles.container}>
+      {/* Send Icon */}
+      <View style={styles.sendBg}>
+        <Feather name="send" size={24} color={colors.primary} />
+      </View>
+      <Text style={styles.title}>Sign In</Text>
+      <Text style={styles.description}>Please enter the code</Text>
+      <View style={styles.emailContainer}>
+        <TextInput
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          placeholderTextColor={"#999"}
+          style={styles.email}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
-
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        <Feather name="user" size={24} color="#666" style={styles.emailIcon} />
+      </View>
+      <View style={styles.passwordContainer}>
+        <TextInput
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Password"
+          secureTextEntry={!isPasswordVisible}
+          returnKeyType="done"
+          placeholderTextColor={"#999"}
+          style={styles.password}
+        />
+        <Feather
+          name="lock"
+          size={24}
+          color="#666"
+          style={styles.passwordIcon}
+        />
+        <TouchableOpacity
+          onPress={() => setIsPasswordVisible((prev) => !prev)}
+          style={styles.eyeIcon}
+        >
+          <Feather
+            name={isPasswordVisible ? "eye-off" : "eye"}
+            size={24}
+            color="#666"
+          />
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.forgot}>Forgot Password?</Text>
+      <TouchableOpacity style={styles.btnLogin}>
+        <Text style={styles.txtLogin}>Sign In</Text>
+      </TouchableOpacity>
+      {/* Or Container */}
+      <View style={styles.orContainer}>
+        <View style={styles.orLine} />
+        <Text>or</Text>
+        <View style={styles.orLine} />
+      </View>
+      {/* Sign In Google */}
+      <TouchableOpacity style={styles.socialBtnContainer}>
+        <FontAwesome5 name="google" size={24} color="tomato" />
+        <Text style={styles.socialBtnText}>Sign in with Google</Text>
+      </TouchableOpacity>
+      {/* Sign In Google */}
+      <TouchableOpacity style={styles.socialBtnContainer}>
+        <FontAwesome5 name="facebook" size={24} color="dodgerblue" />
+        <Text style={styles.socialBtnText}>Sign in with Facebook</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
-}
+};
+
+export default Index;
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    backgroundColor: colors.bg,
+    flex: 1,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  sendBg: {
+    backgroundColor: colors.sendBg,
+    width: 84,
+    height: 84,
+    borderRadius: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    marginTop: 36,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  title: {
+    fontSize: 44,
+    alignSelf: "center",
+    marginTop: 16,
+  },
+  description: {
+    fontSize: 16,
+    alignSelf: "center",
+    marginTop: 8,
+    color: "#666",
+  },
+  emailContainer: {
+    backgroundColor: "white",
+    padding: 16,
+    paddingLeft: 24,
+    marginHorizontal: 32,
+    marginTop: 16,
+    borderRadius: 32,
+  },
+  email: {
+    marginLeft: 28,
+  },
+  emailIcon: {
+    position: "absolute",
+    top: 10,
+    left: 16,
+  },
+  passwordContainer: {
+    backgroundColor: "white",
+    padding: 16,
+    paddingLeft: 24,
+    marginHorizontal: 32,
+    marginTop: 16,
+    borderRadius: 32,
+  },
+  password: {
+    marginLeft: 28,
+  },
+  passwordIcon: {
+    position: "absolute",
+    top: 10,
+    left: 16,
+  },
+  eyeIcon: {
+    position: "absolute",
+    top: 10,
+    right: 20,
+  },
+  forgot: {
+    marginTop: 12,
+    textAlign: "right",
+    marginRight: 40,
+    color: "#666",
+  },
+  btnLogin: {
+    backgroundColor: colors.primary,
+    padding: 16,
+    marginHorizontal: 32,
+    borderRadius: 32,
+    marginTop: 32,
+    // Shadow
+    shadowColor: colors.primary,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  txtLogin: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "600",
+    fontSize: 18,
+  },
+  orContainer: {
+    flexDirection: "row",
+    marginTop: 24,
+    marginHorizontal: 32,
+    alignItems: "center",
+  },
+  orLine: {
+    flex: 1,
+    backgroundColor: "#ccc",
+    height: 1,
+    marginHorizontal: 16,
+  },
+  socialBtnContainer: {
+    flexDirection: "row",
+    gap: 16,
+    alignItems: "center",
+    borderColor: "#666",
+    borderWidth: 1,
+    padding: 12,
+    marginHorizontal: 32,
+    marginTop: 16,
+    borderRadius: 32,
+    justifyContent: "center",
+  },
+  socialBtnText: {
+    fontSize: 16,
   },
 });
