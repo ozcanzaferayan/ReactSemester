@@ -7,7 +7,7 @@ import Notification from '@/components/Notification';
 
 const Home = () => {
   const [notifications, setNotifications] = useState(data);
-
+ 
   return (
     <SafeAreaView>
       <Header />

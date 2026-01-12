@@ -8,7 +8,7 @@ type Props = {
 
 const Notification = ({ notification: { id, img, isRead, text, time, user } }: Props) => {
   const className = !isRead ? 'bg-slate-200' : '';
-
+  
   return (
     <View className={'flex-row gap-4 rounded-xl p-4 ' + className}>
       {/* Avatar */}
