@@ -11,7 +11,7 @@ import { Image, Text, View } from 'react-native';
 
 const Index = () => {
   const { data: pokemonsResult } = usePokemons();
-  const { data: pokemon } = usePokemon(25);
+const { data: pokemon } = usePokemon(25);
 
   return (
     <View>
