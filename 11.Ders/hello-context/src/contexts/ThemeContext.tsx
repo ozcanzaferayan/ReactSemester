@@ -1,21 +1,7 @@
-// 1. Tema tipi oluştur
-// 2. Context tipi oluştur ve Temayı burada kullan
-// 3. Context oluştur ve Context tipini kullan, undefined ata
-// 4. Provider oluştur
-// 4.1. usss state oluştur. (tema rengi olabilir)
-// 4.2. Statei değiştirmek için toggleTheme gibi bir metot yaz.
-// 4.3. Dönülecek value'yu oluştur. 2. adımdaki contextType kullanılabilir
-// 4.4. <ThemeContext.Provider ile children dön. Value'yu da provider'a ver
-// 4.5. Opsiyonel (context küçükse): useTheme'i burada oluştur
-// ====
-// Kurumsal için şablon
-// src/context/theme
-//  L ThemeContext.ts
-//  L ThemeProvider.tsx
-//  L useTheme.ts
-//  L types.ts
 
-import { createContext, ReactNode, useContext, useState } from "react";
+
+import 'expo-sqlite/localStorage/install';
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 export type Theme = "light" | "dark";
 export type ThemeContextType = {
@@ -26,8 +12,24 @@ export const ThemeContext = createContext<ThemeContextType | undefined>(undefine
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
 
+  // uffs
+  // Uygulama ilk açıldığında çağrılır
+  useEffect(() => {
+    restoreTheme();
+  }, [])
+
+  const restoreTheme = () => {
+    const storedTheme = localStorage.getItem('@app_theme');
+    if (storedTheme === "light" || storedTheme === "dark") {
+      setTheme(storedTheme)
+    }
+  }
+
+
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    const nextTheme = theme === "light" ? "dark" : "light"
+    setTheme(nextTheme);
+    localStorage.setItem('@app_theme', nextTheme);
   }
 
   const value: ThemeContextType = {
