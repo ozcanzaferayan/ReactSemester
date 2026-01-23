@@ -1,0 +1,52 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "ieiXQ72TxMjGuM-Is1Dgs",
+      "type": "text",
+      "x": 362.49915673813723,
+      "y": 19561.977610584076,
+      "width": 163.4198455810547,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "ax",
+      "roundness": null,
+      "seed": 1855835693,
+      "version": 34,
+      "versionNonce": 2003301101,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1769187903567,
+      "link": null,
+      "locked": false,
+      "text": "Uygulama fikirleri",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Uygulama fikirleri",
+      "autoResize": true,
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
+    "viewBackgroundColor": "#ffffff",
+    "lockedMultiSelections": {}
+  },
+  "files": {}
+}
